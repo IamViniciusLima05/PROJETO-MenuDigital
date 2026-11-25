@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasa Burger | Cardápio digital</title>
+  <meta name="description" content="Cardápio digital com categorias, carrinho e pedido online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="capa">
+    <div class="capa__texto">
+      <p class="aberto"><span class="luz"></span><span id="status-loja">Aberto agora</span> · entrega em 30-45 min</p>
+      <h1>Brasa Burger</h1>
+      <p>Hambúrguer artesanal na brasa, porções e milk-shakes. Peça pelo cardápio e acompanhe o pedido.</p>
+    </div>
+    <button class="carrinho-btn" id="abrir-carrinho" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg>
+      <span id="qtd-carrinho">0</span>
+      <b id="total-capa">R$ 0,00</b>
+    </button>
+  </header>
+
+  <nav class="categorias" id="categorias" aria-label="Categorias"></nav>
+
+  <main class="cardapio" id="cardapio"></main>
+
+  <footer class="rodape">
+    <p>Brasa Burger · Rua Exemplo, 77 · Ter a Dom, 18h às 23h30</p>
+    <p>Entrega grátis em pedidos acima de R$ 80</p>
+  </footer>
+
+  <!-- ===== CARRINHO ===== -->
+  <dialog class="gaveta" id="gaveta">
+    <div class="gaveta__topo">
+      <h2 id="gaveta-titulo">Seu pedido</h2>
+      <button class="fechar" id="fechar-gaveta" aria-label="Fechar">×</button>
+    </div>
+
+    <div id="etapa-carrinho">
+      <ul class="itens" id="itens"></ul>
+      <div class="entrega" role="radiogroup" aria-label="Forma de entrega">
+        <label><input type="radio" name="entrega" value="entrega" checked><span>Entrega</span></label>
+        <label><input type="radio" name="entrega" value="retirada"><span>Retirar no local</span></label>
+      </div>
+      <form class="cupom" id="form-cupom">
+        <input id="cupom" type="text" placeholder="Cupom de desconto" aria-label="Cupom de desconto">
+        <button class="btn btn--linha" type="submit">Aplicar</button>
+      </form>
+      <p class="dica-cupom" id="msg-cupom">Experimente o cupom <b>BEMVINDO10</b></p>
+      <dl class="contas" id="contas"></dl>
+      <button class="btn btn--cheio" id="ir-checkout">Continuar</button>
+    </div>
+
+    <form id="etapa-checkout" hidden novalidate>
+      <label>Nome<input id="c-nome" type="text" autocomplete="name" required></label>
+      <label>WhatsApp<input id="c-tel" type="tel" autocomplete="tel" placeholder="(51) 99999-9999" required></label>
+      <label id="campo-endereco">Endereço de entrega<input id="c-end" type="text" autocomplete="street-address" placeholder="Rua, número, bairro"></label>
+      <fieldset class="pagamento">
+        <legend>Pagamento na entrega</legend>
+        <label><input type="radio" name="pag" value="Pix" checked> Pix</label>
+        <label><input type="radio" name="pag" value="Cartão"> Cartão</label>
+        <label><input type="radio" name="pag" value="Dinheiro"> Dinheiro</label>
+      </fieldset>
+      <label id="campo-troco" hidden>Troco para quanto?<input id="c-troco" type="text" inputmode="decimal" placeholder="Ex.: 100"></label>
+      <p class="erro" id="erro" role="alert"></p>
+      <div class="linha-botoes">
+        <button type="button" class="btn btn--linha" id="voltar-carrinho">Voltar</button>
+        <button type="submit" class="btn btn--cheio" id="finalizar">Fazer pedido</button>
+      </div>
+    </form>
+
+    <div id="etapa-acompanhar" hidden>
+      <p class="pedido-num">Pedido <b id="num-pedido"></b></p>
+      <ol class="linha-tempo" id="linha-tempo"></ol>
+      <p class="previsao" id="previsao"></p>
+      <a class="btn btn--whats" id="link-whats" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+      <button class="btn btn--linha" id="novo-pedido">Fazer outro pedido</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
